@@ -53,6 +53,38 @@ def add_entry():
         return redirect(url_for("home"))
     else:
         return "Nur POST-Anfragen erlaubt!"
+    
+@app.route("/delete/<int:index>", methods=["POST"])
+def delete_entry(index):
+    database = load_database()
+    if 0 <= index < len(database):  # Prüfe, ob Index gültig ist
+        removed = database.pop(index)  # Entferne das Medium
+        save_database(database)  # Speichere die aktualisierte Datenbank
+        return redirect(url_for("home"))  # Zur Hauptseite weiterleiten
+    else:
+        return "Ungültiger Index! <a href='/'>Zurück</a>"
+
+@app.route("/edit/<int:index>")
+def edit_entry_view(index):
+    database = load_database()
+    if 0 <= index < len(database):  # Prüfe, ob Index gültig ist
+        entry = database[index]  # Hole den Eintrag
+        return render_template("edit.html", entry=entry, index=index)
+    else:
+        return "Ungültiger Index! <a href='/'>Zurück</a>"
+
+@app.route("/edit/<int:index>", methods=["POST"])
+def edit_entry(index):
+    database = load_database()
+    if 0 <= index < len(database):  # Prüfe, ob Index gültig ist
+        entry = database[index]
+        entry["title"] = request.form["title"]
+        entry["type"] = request.form["type"]
+        entry["status"] = request.form["status"]
+        save_database(database)
+        return redirect(url_for("home"))  # Zur Hauptseite weiterleiten
+    else:
+        return "Ungültiger Index! <a href='/'>Zurück</a>"
 
 # Flask Server starten
 if __name__ == "__main__":
