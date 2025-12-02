@@ -70,6 +70,12 @@
             <div class="media-item">
                 <p><strong>{{ entry.title }}</strong> ({{ entry.type }})</p>
                 <p>Status: {{ entry.status }}</p>
+                <!-- Bearbeiten-Button -->
+                <a href="/edit/{{ loop.index0 }}">Bearbeiten</a>
+                <!-- Löschen-Button -->
+                <form method="POST" action="/delete/{{ loop.index0 }}">
+                    <button type="submit">Löschen</button>
+                </form>
             </div>
             {% endfor %}
         {% else %}
