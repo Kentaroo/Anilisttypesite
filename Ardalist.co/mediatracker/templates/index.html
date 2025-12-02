@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 30px;
+        }
+        h1 {
+            color: #444;
+        }
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        input, button {
+            width: 300px;
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+        }
+        button {
+            cursor: pointer;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        .media-list {
+            margin-top: 20px;
+            text-align: left;
+            display: inline-block;
+        }
+        .media-item {
+            background: white;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Media Tracker</h1>
+
+    <!-- Eingabeformular -->
+    <div class="form-container">
+        <form method="POST" action="/add">
+            <input type="text" name="title" placeholder="Titel des Mediums" required>
+            <input type="text" name="type" placeholder="Medientyp (z.B. Anime, Buch, Film)" required>
+            <input type="text" name="status" placeholder="Status (z.B. abgeschlossen, laufend)" required>
+            <button type="submit">Eintrag hinzufügen</button>
+        </form>
+    </div>
+
+    <!-- Dynamische Anzeige der Medien-Einträge -->
+    <div class="media-list">
+        <h2>Medien-Einträge:</h2>
+        {% if media_entries %}
+            {% for entry in media_entries %}
+            <div class="media-item">
+                <p><strong>{{ entry.title }}</strong> ({{ entry.type }})</p>
+                <p>Status: {{ entry.status }}</p>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>Keine Medien-Einträge vorhanden!</p>
+        {% endif %}
+    </div>
+</body>
+</html>
