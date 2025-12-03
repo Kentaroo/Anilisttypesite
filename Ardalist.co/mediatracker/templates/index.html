@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="page-title">Deine Mediensammlung</h1>
+
+<!-- Formular zum Hinzufügen -->
+<form method="POST" action="/add" enctype="multipart/form-data" class="form add-form">
+    <input type="text" name="title" placeholder="Titel" required>
+    <input type="text" name="type" placeholder="Typ (Anime, Manga, Film...)" required>
+    <input type="text" name="status" placeholder="Status (Watching, Completed)" required>
+    <input type="file" name="image" accept="image/*">
+
+    <button class="btn">Hinzufügen</button>
+</form>
+
+<!-- GRID -->
+<div class="media-grid">
+    {% for entry in media_entries %}
+    <div class="media-card">
+
+        {% if entry.image %}
+            <img src="/uploads/{{ entry.image }}" class="media-img">
+        {% else %}
+            <img src="/static/img/default-banner.jpg" class="media-img">
+        {% endif %}
+
+        <div class="media-info">
+            <h3>{{ entry.title }}</h3>
+            <p>{{ entry.type }} • {{ entry.status }}</p>
+        </div>
+
+        <div class="media-actions">
+            <a href="/edit/{{ loop.index0 }}" class="btn small">Bearbeiten</a>
+            <form action="/delete/{{ loop.index0 }}" method="POST" style="display:inline;">
+                <button class="btn small danger">Löschen</button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

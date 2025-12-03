@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Statistiken</h1>
+
+<div class="chart-container">
+    <canvas id="statusChart"></canvas>
+</div>
+
+<div class="chart-container">
+    <canvas id="typeChart"></canvas>
+</div>
+
+<script>
+const statsByStatus = JSON.parse(`{{ stats_by_status | tojson }}`);
+const statsByType = JSON.parse('{{ stats_by_type | tojson }}');
+
+// STATUS DIAGRAMM – Balken
+new Chart(document.getElementById("statusChart"), {
+    type: "bar",
+    data: {
+        labels: Object.keys(statsByStatus),
+        datasets: [{
+            label: "Status",
+            data: Object.values(statsByStatus),
+            borderWidth: 2
+        }]
+    }
+});
+
+// TYP DIAGRAMM – Kreis
+new Chart(document.getElementById("typeChart"), {
+    type: "doughnut",
+    data: {
+        labels: Object.keys(statsByType),
+        datasets: [{
+            data: Object.values(statsByType)
+        }]
+    }
+});
+</script>
+
+
+{% endblock %}
