@@ -1,0 +1,32 @@
+media-tracker/
+│
+├── app/                # Hauptcode der Applikation
+│   ├── models/         # Datenbankmodelle
+│   ├── routes/         # Routen/Endpunkte der Applikation (für verschiedene Seiten)
+│   ├── templates/      # HTML-Vorlagen
+│   ├── static/         # Dateien wie CSS, JS, Bilder
+│   │   ├── css/        # CSS-Dateien für Styling
+│   │   ├── js/         # JavaScript-Dateien
+│   │   ├── images/     # Lokale Bilder für Medien
+│   └── utils/          # Hilfsfunktionen (z.B. für Bildbearbeitung, Statistiken)
+│
+├── database/           # SQLite/Postgres Datenbank-Dateien
+│
+├── tests/              # Test-Skripte für Unit Tests
+│
+├── docs/               # Projekt-Dokumentation (falls benötigt)
+│   ├── api-docs/       # API-Dokumentation
+│   ├── setup.md        # Anleitung zur Einrichtung
+│
+├── config/             # Konfigurationsdateien
+│   ├── development.py  # Entwicklungsumgebung
+│   ├── production.py   # Produktionsumgebung
+│
+├── migrations/         # Datenbank-Migrationsdateien (für Änderungen)
+│
+├── venv/               # Virtuelle Umgebung für Python-Abhängigkeiten
+│
+├── requirements.txt    # Python-Abhängigkeiten (z. B. Flask, SQLAlchemy)
+├── main.py             # Startpunkt der Applikation
+├── README.md           # Beschreibung des Projekts
+└── .gitignore          # Dateien, die nicht zu Git hinzugefügt werden sollen

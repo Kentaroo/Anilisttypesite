@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+{% if results %}
+    <h2>Ergebnisse für '{{ query }}'</h2>
+
+    <div class="media-grid">
+        {% for entry in results %}
+        <div class="media-card">
+            <img src="/uploads/{{ entry.image }}" class="media-img">
+            <div class="media-info">
+                <h3>{{ entry.title }}</h3>
+                <p>{{ entry.type }} — {{ entry.status }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block header %}
+<!-- Profil Header mit Banner & Avatar -->
+<header class="banner">
+    <div class="banner-overlay"></div>
+    <img src="/static/img/default-banner.jpg" class="banner-img">
+    <div class="profile-section">
+        <img src="/static/img/default-avatar.jpg" class="avatar">
+        <div>
+            <h2 class="username">Dein Benutzername</h2>
+            <p class="subtitle">Media Tracker</p>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<div class="profile-page">
+
+    <!-- Sidebar editierbar -->
+    <aside class="profile-sidebar">
+        <h3>Notizen</h3>
+        <textarea placeholder="Deine Notizen hier..." class="sidebar-note"></textarea>
+    </aside>
+
+    <!-- Hauptcontent: Activity -->
+    <section class="profile-main">
+        <h2>Letzte Aktivitäten</h2>
+        <div class="media-grid">
+            {% for entry in activity %}
+            <div class="media-card">
+                {% if entry.image %}
+                <img src="/uploads/{{ entry.image }}" class="media-img">
+                {% else %}
+                <img src="/static/img/default-banner.jpg" class="media-img">
+                {% endif %}
+                <div class="media-info">
+                    <h3>{{ entry.title }}</h3>
+                    <p>{{ entry.type }} • {{ entry.status }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+        <script>
+            // Dummy-Daten (später durch Flask-Stats ersetzen)
+            const statsByStatus = { "Watching": 2, "Completed": 5 };
+            const statsByType = { "Anime": 3, "Buch": 4 };
+
+            new Chart(document.getElementById("statusChart"), {
+                type: "bar",
+                data: {
+                    labels: Object.keys(statsByStatus),
+                    datasets: [{
+                        label: "Status",
+                        data: Object.values(statsByStatus),
+                        borderWidth: 2
+                    }]
+                }
+            });
+
+            new Chart(document.getElementById("typeChart"), {
+                type: "doughnut",
+                data: {
+                    labels: Object.keys(statsByType),
+                    datasets: [{
+                        data: Object.values(statsByType)
+                    }]
+                }
+            });
+        </script>
+
+    </section>
+</div>
+{% endblock %}

@@ -1,0 +1,420 @@
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden; /* verhindert horizontales Scrollen */
+}
+
+/* ===========================
+   Root Variablen für Farben, Radius & Schatten
+   =========================== */
+:root {
+    --bg: #0b1622;          /* Haupt-Hintergrundfarbe */
+    --bg-card: #152232;     /* Karten-Hintergrund */
+    --text: #e5e5e5;        /* Haupttextfarbe */
+    --text-dim: #9aa4b2;    /* Gedimmter Text */
+    --accent: #3db4f2;      /* Akzentfarbe für Buttons, Logo etc. */
+    --radius: 10px;          /* Standard-Radius für Karten, Buttons */
+    --shadow: 0 4px 18px rgba(0,0,0,0.25); /* Boxshadow */
+}
+
+/* ===========================
+   Body & Grundlayout
+   =========================== */
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* =====================================
+   GLOBAL HEADER (AniList Style)
+====================================== */
+/* =============================
+   GLOBAL HEADER (final version)
+============================== */
+.global-header {    
+    display: grid;                          /* Flex → Grid für Zentrierung */
+    grid-template-columns: auto 1fr auto;   /* links - mitte - rechts */
+    align-items: center;
+    padding: 12px 40px;
+    background: #0d1623;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    position: relative;
+    z-index: 50;
+}
+
+/* ----- LINKER BEREICH ----- */
+.header-left {
+    justify-self: start;          /* links ausrichten */
+}
+.header-left .logo {
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--accent);
+    text-decoration: none;
+}
+
+/* ----- MITTLERER BEREICH (Suche) ----- */
+.header-search {
+    justify-self: center;         /* zentriert in der Grid-Mitte */
+    width: 100%;
+    max-width: 260px;             /* Suchfeld begrenzen */
+    display: flex;
+    justify-content: center;      /* Input innen zentrieren */
+}
+
+.header-search input {
+    width: 100%;
+    background: #111c28;
+    border: 1px solid #233142;
+    padding: 10px 14px;
+    border-radius: var(--radius);
+    color: var(--text);
+}
+
+/* ----- RECHTS (Profil) ----- */
+.header-right {
+    justify-self: end;            /* rechts ausrichten */
+    display: flex;
+    flex-shrink: 0;
+    min-width: 100px;             /* reserviert Platz für Profil */
+}
+
+.header-right a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+    opacity: 0.85;
+    margin-left: 20px;            /* Abstand zwischen Icons/Links */
+}
+.header-right a:hover {
+    opacity: 1;
+    color: var(--accent);
+}
+
+/* ----- MOBILE ----- */
+@media (max-width: 600px) {
+    .global-header {
+        padding: 12px 20px;
+    }
+
+    .header-search {
+        max-width: 180px;
+    }
+
+    .header-right {
+        min-width: 70px;
+    }
+}
+
+
+/* ===========================
+   PROFIL HEADER / BANNER
+   =========================== */
+.banner {
+    position: relative;
+    height: 240px;
+}
+.banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.banner-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(rgba(0,0,0,0), #0b1622);
+}
+.profile-section {
+    position: absolute;
+    bottom: 20px; left: 40px;
+    display: flex;
+    align-items: center;
+}
+.avatar {
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    border: 3px solid var(--accent);
+    margin-right: 20px;
+}
+
+/* ===========================
+   PROFILE PAGE & SIDEBAR
+   =========================== */
+.profile-page {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.profile-sidebar {
+    width: 250px;
+    background: var(--bg-card);
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.profile-sidebar h3 {
+    margin: 0;
+    font-size: 18px;
+    color: var(--accent);
+}
+
+.profile-sidebar p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--text-dim);
+}
+
+.profile-sidebar .sidebar-note {
+    width: 90%;
+    height: 200px;
+    background: #0e1a25;
+    border: 1px solid #233142;
+    color: var(--text);
+    padding: 10px;
+    border-radius: var(--radius);
+    resize: vertical;
+}
+
+.profile-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ===========================
+   ACTIVITY / LETZTE EINTRÄGE
+   =========================== */
+.activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.activity-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    box-shadow: var(--shadow);
+}
+
+.activity-card img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: var(--radius);
+}
+
+/* Activity Filter Buttons */
+.activity-filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.activity-filters button {
+    padding: 6px 12px;
+    border-radius: var(--radius);
+    border: none;
+    background: #233142;
+    color: var(--text);
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.activity-filters button.active,
+.activity-filters button:hover {
+    background: var(--accent);
+    color: white;
+}
+
+/* ===========================
+   STATS / CHARTS
+   =========================== */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.chart-container {
+    width: 600px;
+    margin: 40px auto;
+    background: var(--bg-card);
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+/* ===========================
+   MEDIA GRID & CARDS
+   =========================== */
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 180px);
+    gap: 25px;
+    justify-content: center;
+}
+
+.media-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease;
+}
+
+.media-card:hover { transform: scale(1.05); }
+
+.media-img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+}
+
+.media-info { padding: 10px; }
+
+.media-actions {
+    padding: 10px;
+    text-align: center;
+}
+
+/* ===========================
+   BUTTONS
+   =========================== */
+.btn {
+    background: var(--accent);
+    border: none;
+    padding: 8px 14px;
+    border-radius: var(--radius);
+    color: white;
+    cursor: pointer;
+}
+.btn.small { padding: 6px 10px; font-size: 14px; }
+.btn.danger { background: #e84a4a; }
+
+/* ===========================
+   FORM STYLING
+   =========================== */
+.add-form, .search-form {
+    background: var(--bg-card);
+    padding: 20px;
+    border-radius: var(--radius);
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 40px;
+    box-shadow: var(--shadow);
+}
+
+.add-form input[type="text"],
+.add-form input[type="file"],
+.search-form input,
+.search-form select {
+    background: #0e1a25;
+    border: 1px solid #233142;
+    border-radius: var(--radius);
+    padding: 10px;
+    color: var(--text);
+}
+
+.add-form input::placeholder,
+.search-form input::placeholder { color: var(--text-dim); }
+
+/* ===========================
+   BOTTOM NAV (AniList Style)
+   =========================== */
+.nav-bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #111c28;
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 0;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.25);
+    z-index: 100;
+}
+.nav-bottom a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 16px;
+    opacity: 0.8;
+}
+.nav-bottom a:hover { color: var(--accent); opacity: 1; }
+
+/* ===========================
+   CONTENT WRAPPER & SECTION
+   =========================== */
+.content-wrapper {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.section-title {
+    width: 100%;
+    max-width: 1200px;
+    font-size: 24px;
+    margin: 20px 0 10px;
+    text-align: left;
+}
+
+.section-divider {
+    width: 100%;
+    opacity: 0.1;
+    margin: 40px 0;
+}
+
+/* ===========================
+   Responsive Anpassungen
+   =========================== */
+@media (max-width: 768px) {
+    .media-grid { grid-template-columns: repeat(auto-fill, 140px); }
+
+    .content-wrapper { padding: 20px; }
+
+    .add-form, .search-form { width: 100%; }
+
+    .chart-container { width: 100%; margin: 20px 0; }
+
+    .profile-page { flex-direction: column; }
+
+    .profile-sidebar { width: 100%; }
+
+    .stats-grid { grid-template-columns: 1fr; }
+
+    .activity-card img { width: 50px; height: 50px; }
+}
+
+.footer {
+    width: 100%;
+    padding: 15px 40px;
+    background: #0d1623;
+    color: var(--text-dim);
+    text-align: center;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.25);
+    position: static; /* oder static */
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+}

@@ -1,0 +1,20 @@
+[
+    {
+        "title": "Dragonball Z",
+        "type": "Anime",
+        "status": "Completed",
+        "image": "87ca1daa-3e41-4d30-a591-2fabbfa4f18c_Dragonball-Z.jpg"
+    },
+    {
+        "title": "Naruto",
+        "type": "Anime",
+        "status": "Completed",
+        "image": "517f3b8a-7e1a-4fbc-a09b-8708f7245a08_MV5BZTNjOWI0ZTAtOGY1OS00ZGU0LWEyOWYtMjhkYjdlYmVjMDk2XkEyXkFqcGc._V1_FMjpg_UX1000_.jpg"
+    },
+    {
+        "title": "Mustafa",
+        "type": "Film",
+        "status": "Watching",
+        "image": null
+    }
+]

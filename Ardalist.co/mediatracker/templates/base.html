@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title or "Media Tracker" }}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- HEADER -->
+     {% block profile_header %}
+    <!-- Default Header für Home/Search -->
+    <header class="global-header">
+        <div class="header-left">
+            <a href="/" class="logo">M</a>
+        </div>
+
+        <form action="/search" method="POST" class="header-search">
+            <input type="text" name="query" placeholder="Search..." />
+            <input type="hidden" name="filter_by" value="title">
+        </form>
+
+        <div class="header-right">
+            <a href="/profile">Profil</a>
+        </div>
+    </header>
+
+    {% endblock %}
+
+    <!-- CONTENT -->
+    <main class="content-wrapper">
+        {% block content %}{% endblock %}
+    </main>
+
+
+    <footer class="footer">
+    <p>© 2025 Media Tracker</p>
+    </footer>
+
+</body>
+</html>
